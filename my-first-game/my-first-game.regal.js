@@ -1980,11 +1980,8 @@ var makeBundle = (game) => {
     };
 };
 
-// Constants
-var ROCK = "rock";
-var PAPER = "paper";
-var SCISSORS = "scissors";
-var POSSIBLE_MOVES = [ROCK, PAPER, SCISSORS];
+//~ Constants ~//
+var POSSIBLE_MOVES = ["rock", "paper", "scissors"];
 var WIN_TABLE = {
     rock: {
         paper: false,
@@ -1999,18 +1996,29 @@ var WIN_TABLE = {
         paper: true
     }
 };
-// Hooks
+//~ Hooks ~//
+onStartCommand(function (game) {
+    // Initialize state
+    game.state.playerWins = 0;
+    game.state.opponentWins = 0;
+    // Prompt the player
+    game.output.write("Play rock, paper, or scissors:");
+});
 onPlayerCommand(function (command) { return function (game) {
+    // Sanitize the player's command
     var playerMove = command.toLowerCase().trim();
+    // Make sure the command is valid
     if (POSSIBLE_MOVES.includes(playerMove)) {
+        // Choose a move for the opponent
         var opponentMove = game.random.choice(POSSIBLE_MOVES);
         game.output.write("The opponent plays " + opponentMove + ".");
         if (playerMove === opponentMove) {
             game.output.write("It's a tie!");
         }
         else {
-            var isWin = WIN_TABLE[playerMove][opponentMove];
-            if (isWin) {
+            // Look up who wins in the win table
+            var isPlayerWin = WIN_TABLE[playerMove][opponentMove];
+            if (isPlayerWin) {
                 game.output.write("Your " + playerMove + " beats the opponent's " + opponentMove + "!");
                 game.state.playerWins++;
             }
@@ -2019,18 +2027,16 @@ onPlayerCommand(function (command) { return function (game) {
                 game.state.opponentWins++;
             }
         }
+        // Print win totals
         game.output.write("Your wins: " + game.state.playerWins + ". The opponent's wins: " + game.state.opponentWins);
     }
     else {
+        // Print an error message if the command isn't rock, paper, or scissorss
         game.output.write("I don't understand that command: " + playerMove + ".");
     }
+    // Prompt the player again
     game.output.write("Play rock, paper, or scissors:");
 }; });
-onStartCommand(function (game) {
-    game.state.playerWins = 0;
-    game.state.opponentWins = 0;
-    game.output.write("Play rock, paper, or scissors:");
-});
 
 /* Initialize game */
 Game.init({
