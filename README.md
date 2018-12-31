@@ -1,1 +1,2 @@
 # demos
+Regal Framework demos
