@@ -2031,7 +2031,7 @@ onPlayerCommand(function (command) { return function (game) {
         game.output.write("Your wins: " + game.state.playerWins + ". The opponent's wins: " + game.state.opponentWins);
     }
     else {
-        // Print an error message if the command isn't rock, paper, or scissorss
+        // Print an error message if the command isn't rock, paper, or scissors
         game.output.write("I don't understand that command: " + playerMove + ".");
     }
     // Prompt the player again
