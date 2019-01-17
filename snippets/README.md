@@ -35,4 +35,5 @@ Name | Command | Description
 --- | --- | ---
 Immediate Exeuction | `immediate` | Demonstrates immediate event queueing.
 Delayed Exeuction | `delay` | Demonstrates delayed event queueing.
+StateType and Arrays | `statetype` | Demonstrates using `StateType` and `GameEventBuilder` to create parameterized events. Uses an agent array.
 

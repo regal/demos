@@ -2102,6 +2102,18 @@ const prepImmediate = (name) => on("PREP IMMEDIATE", game => {
 const NAME = "King Arthur";
 var immediateExecution = prepImmediate(NAME).then(makeSword(NAME));
 
+const on$1 = on;
+const init = on$1("INIT", game => {
+    game.state.num = 0;
+    game.state.names = ["spot", "buddy", "lucky"];
+});
+const pick = on$1("PICK", game => {
+    const choice = game.state.names[game.state.num];
+    game.output.write(`You picked ${choice}!`);
+    game.state.num++;
+});
+var statetypeAndArrays = init.then(pick, pick, pick);
+
 var makeBundle = (game) => {
     return {
         getMetadataCommand: game.getMetadataCommand.bind(game),
@@ -2114,7 +2126,8 @@ var makeBundle = (game) => {
 
 const SNIPPETS = {
     immediate: immediateExecution,
-    delay: delayedExecution
+    delay: delayedExecution,
+    statetype: statetypeAndArrays
 };
 //~ Hooks ~//
 onStartCommand(game => {
