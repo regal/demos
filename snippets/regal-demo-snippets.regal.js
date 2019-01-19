@@ -2114,6 +2114,19 @@ const pick = on$1("PICK", game => {
 });
 var statetypeAndArrays = init.then(pick, pick, pick);
 
+class Bucket extends Agent {
+    constructor(size, contents, isFull) {
+        super();
+        this.size = size;
+        this.contents = contents;
+        this.isFull = isFull;
+    }
+}
+const illegalEvent = on("EVENT", game => {
+    const waterBucket = new Bucket(1, "water", true);
+    waterBucket.isFull = false;
+});
+
 var makeBundle = (game) => {
     return {
         getMetadataCommand: game.getMetadataCommand.bind(game),
@@ -2127,7 +2140,8 @@ var makeBundle = (game) => {
 const SNIPPETS = {
     immediate: immediateExecution,
     delay: delayedExecution,
-    statetype: statetypeAndArrays
+    statetype: statetypeAndArrays,
+    illegal: illegalEvent
 };
 //~ Hooks ~//
 onStartCommand(game => {
