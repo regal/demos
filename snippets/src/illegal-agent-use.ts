@@ -12,7 +12,7 @@ class Bucket extends Agent {
 
 const illegalEvent = on("EVENT", game => {
     const waterBucket = new Bucket(1, "water", true);
-    waterBucket.isFull = false;
+    waterBucket.isFull = false; // Uh-oh!
 });
 
 export default illegalEvent;
