@@ -9,8 +9,12 @@ const readline = require("readline").createInterface({
 // Helper function to print output lines
 const printLines = gameResponse => {
     console.log("");
-    for (const line of gameResponse.output.log) {
-        console.log(line.data);
+    if (gameResponse.output.wasSuccessful) {
+        for (const line of gameResponse.output.log) {
+            console.log(line.data);
+        }
+    } else {
+        console.log(gameResponse);
     }
 };
 
