@@ -6,6 +6,7 @@ import statetypeAndArrays from "./statetype-and-arrays";
 import definingAgents from "./defining-agents";
 import illegalAgentUse from "./illegal-agent-use";
 import implicitActivation from "./implicit-activation";
+import explicitActivation from "./explicit-activation";
 
 const SNIPPETS = {
     immediate: immediateExecution,
@@ -13,7 +14,8 @@ const SNIPPETS = {
     statetype: statetypeAndArrays,
     agent: definingAgents,
     illegal: illegalAgentUse,
-    implicit: implicitActivation
+    implicit: implicitActivation,
+    explicit: explicitActivation
 };
 
 //~ Hooks ~//

@@ -2187,24 +2187,57 @@ class MultiParent extends Agent {
 const implicit1 = on("IMPLICIT 1", game => {
     game.state.myAgent = new Parent(1); // #1 is activated by GameInstance.state
     game.state.myAgent.child = new Parent(2); // #2 is activated by #1
+    game.output.write(`${game.state.myAgent.num} and ${game.state.myAgent.child.num} are active.`);
 });
 const implicit2 = on("IMPLICIT 2", game => {
     const p = new Parent(1, new Parent(2)); // #1 and #2 are both inactive
     game.state.myAgent = p; // #1 and #2 are activated by GameInstance.state
+    game.output.write(`${game.state.myAgent.num} and ${game.state.myAgent.child.num} are active.`);
 });
 const implicit3 = on("IMPLICIT 3", game => {
     const mp = new MultiParent(1, [new Parent(2), new Parent(3)]); // #1, #2, and #3 are inactive
     game.state.myAgent = mp; // #1, #2, and #3 are activated by GameInstance.state
+    game.output.write(`${game.state.myAgent.num}, ${game.state.myAgent.children[0].num}, and ${game.state.myAgent.children[1].num} are active.`);
 });
 const implicit4 = on("IMPLICIT 4", game => {
     game.state.myAgent = new MultiParent(1); // #1 is activated by GameInstance.state
     game.state.myAgent.children = [new Parent(2), new Parent(3)]; // #2 and #3 are activated by #1
+    game.output.write(`${game.state.myAgent.num}, ${game.state.myAgent.children[0].num}, and ${game.state.myAgent.children[1].num} are active.`);
 });
 const implicit5 = on("IMPLICIT 5", game => {
     game.state.myAgent = new MultiParent(1, [new Parent(2)]); // #1 and #2 are activated by GameInstance.state
     game.state.myAgent.children.push(new Parent(3)); // #3 is activated by #1
+    game.output.write(`${game.state.myAgent.num}, ${game.state.myAgent.children[0].num}, and ${game.state.myAgent.children[1].num} are active.`);
 });
 var implicitActivation = implicit1.then(implicit2, implicit3, implicit4, implicit5);
+
+/**
+ * Demonstrates how to activate an agent explicitly.
+ *
+ * For more information, see https://github.com/regal/regal.
+ */
+class CustomAgent extends Agent {
+    constructor(num) {
+        super();
+        this.num = num;
+    }
+}
+const explicit1 = on("EXPLICIT 1", game => {
+    const agent = game.using(new CustomAgent(1)); // #1 is activated
+    game.output.write(`${agent.num} is active.`);
+});
+const explicit2 = on("EXPLICIT 2", game => {
+    const agents = game.using([new CustomAgent(1), new CustomAgent(2)]); // #1 and #2 are activated
+    game.output.write(`${agents[0].num} and ${agents[1].num} are active.`);
+});
+const explicit3 = on("EXPLICIT 3", game => {
+    const { agent1, agent2 } = game.using({
+        agent1: new CustomAgent(1),
+        agent2: new CustomAgent(2)
+    }); // #1 and #2 are activated
+    game.output.write(`${agent1.num} and ${agent2.num} are active.`);
+});
+var explicitActivation = explicit1.then(explicit2, explicit3);
 
 var makeBundle = (game) => {
     return {
@@ -2222,7 +2255,8 @@ const SNIPPETS = {
     statetype: statetypeAndArrays,
     agent: definingAgents,
     illegal: illegalEvent,
-    implicit: implicitActivation
+    implicit: implicitActivation,
+    explicit: explicitActivation
 };
 //~ Hooks ~//
 onStartCommand(game => {
