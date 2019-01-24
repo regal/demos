@@ -26,5 +26,7 @@ GAME_INSTANCE = start.instance;
 readline.on("line", command => {
     const resp = game.postPlayerCommand(GAME_INSTANCE, command);
     printLines(resp);
-    GAME_INSTANCE = resp.instance;
+    if (resp.output.wasSuccessful) {
+        GAME_INSTANCE = resp.instance;
+    }
 });
