@@ -1,3 +1,9 @@
+/**
+ * Demonstrates how to define and use an agent.
+ * 
+ * For more information, see https://github.com/regal/regal.
+ */
+
 import { Agent, on } from "regal";
 
 class Bucket extends Agent {

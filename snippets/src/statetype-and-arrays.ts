@@ -1,3 +1,10 @@
+/**
+ * Demonstrates using StateType and GameEventBuilder to create
+ * parameterized events. Uses an agent array.
+ * 
+ * For more information, see https://github.com/regal/regal.
+ */
+
 import { on as _on, GameEventBuilder } from "regal";
 
 interface MyState {

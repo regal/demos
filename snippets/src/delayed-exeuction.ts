@@ -1,3 +1,9 @@
+/**
+ * Demonstrates delayed event queueing.
+ * 
+ * For more information, see https://github.com/regal/regal.
+ */
+
 import { on, enqueue } from "regal";
 
 const hitGround = (item: string) =>

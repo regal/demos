@@ -1,3 +1,9 @@
+/**
+ * Demonstrates immediate event queueing.
+ * 
+ * For more information, see https://github.com/regal/regal.
+ */
+
 import { on } from "regal";
 
 const learnSkill = (name: string, skill: string) =>

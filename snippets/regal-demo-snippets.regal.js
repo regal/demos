@@ -2057,6 +2057,11 @@ const Game = {
     _isInitialized: false
 };
 
+/**
+ * Demonstrates delayed event queueing.
+ *
+ * For more information, see https://github.com/regal/regal.
+ */
 const hitGround = (item) => on(`HIT GROUND <${item}>`, game => {
     game.output.write(`${item} hits the ground. Thud!`);
 });
@@ -2076,6 +2081,11 @@ const prepDelay = on("PREP DELAY", game => {
 });
 var delayedExecution = prepDelay.then(drop);
 
+/**
+ * Demonstrates immediate event queueing.
+ *
+ * For more information, see https://github.com/regal/regal.
+ */
 const learnSkill = (name, skill) => on(`LEARN SKILL <${skill}>`, game => {
     game.output.write(`${name} learned ${skill}!`);
 });
@@ -2089,6 +2099,12 @@ const makeSword = (name) => on(`MAKE SWORD`, game => {
 });
 var immediateExecution = makeSword("King Arthur");
 
+/**
+ * Demonstrates using StateType and GameEventBuilder to create
+ * parameterized events. Uses an agent array.
+ *
+ * For more information, see https://github.com/regal/regal.
+ */
 const on$1 = on;
 const init = on$1("INIT", game => {
     game.state.num = 0;
@@ -2101,6 +2117,11 @@ const pick = on$1("PICK", game => {
 });
 var statetypeAndArrays = init.then(pick, pick, pick);
 
+/**
+ * Demonstrates how to define and use an agent.
+ *
+ * For more information, see https://github.com/regal/regal.
+ */
 class Bucket extends Agent {
     constructor(size, contents, isFull) {
         super();
@@ -2124,6 +2145,11 @@ const pour = on("POUR", game => {
 });
 var definingAgents = init$1.then(pour, pour);
 
+/**
+ * Throws an error because an inactive agent is accessed within a game cycle.
+ *
+ * For more information, see https://github.com/regal/regal.
+ */
 class Bucket$1 extends Agent {
     constructor(size, contents, isFull) {
         super();
