@@ -2077,11 +2077,9 @@ const prepDelay = on("PREP DELAY", game => {
 var delayedExecution = prepDelay.then(drop);
 
 const learnSkill = (name, skill) => on(`LEARN SKILL <${skill}>`, game => {
-    game.state[name].skills.push(skill);
     game.output.write(`${name} learned ${skill}!`);
 });
 const addItemToInventory = (name, item) => on(`ADD ITEM <${item}>`, game => {
-    game.state[name].inventory.push(item);
     game.output.write(`Added ${item} to ${name}'s inventory.`);
 });
 const makeSword = (name) => on(`MAKE SWORD`, game => {
@@ -2089,18 +2087,7 @@ const makeSword = (name) => on(`MAKE SWORD`, game => {
     return learnSkill(name, "Blacksmithing")
         .then(addItemToInventory(name, "Sword"));
 });
-class Fighter extends Agent {
-    constructor(inventory = [], skills = []) {
-        super();
-        this.inventory = inventory;
-        this.skills = skills;
-    }
-}
-const prepImmediate = (name) => on("PREP IMMEDIATE", game => {
-    game.state[name] = new Fighter();
-});
-const NAME = "King Arthur";
-var immediateExecution = prepImmediate(NAME).then(makeSword(NAME));
+var immediateExecution = makeSword("King Arthur");
 
 const on$1 = on;
 const init = on$1("INIT", game => {
