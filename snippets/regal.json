@@ -1,0 +1,7 @@
+{
+    "bundler": {
+        "output": {
+            "minify": true
+        }
+    }
+}
