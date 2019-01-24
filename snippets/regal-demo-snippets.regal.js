@@ -2122,9 +2122,32 @@ class Bucket extends Agent {
         this.isFull = isFull;
     }
 }
+const init$1 = on("INIT", game => {
+    game.state.bucket = new Bucket(5, "famous chili", true);
+});
+const pour = on("POUR", game => {
+    const bucket = game.state.bucket;
+    if (bucket.isFull) {
+        bucket.isFull = false;
+        game.output.write(`You pour out the ${bucket.contents}.`);
+    }
+    else {
+        game.output.write("The bucket is already empty!");
+    }
+});
+var definingAgents = init$1.then(pour, pour);
+
+class Bucket$1 extends Agent {
+    constructor(size, contents, isFull) {
+        super();
+        this.size = size;
+        this.contents = contents;
+        this.isFull = isFull;
+    }
+}
 const illegalEvent = on("EVENT", game => {
-    const waterBucket = new Bucket(1, "water", true);
-    waterBucket.isFull = false;
+    const waterBucket = new Bucket$1(1, "water", true);
+    waterBucket.isFull = false; // Uh-oh!
 });
 
 var makeBundle = (game) => {
@@ -2141,6 +2164,7 @@ const SNIPPETS = {
     immediate: immediateExecution,
     delay: delayedExecution,
     statetype: statetypeAndArrays,
+    agent: definingAgents,
     illegal: illegalEvent
 };
 //~ Hooks ~//

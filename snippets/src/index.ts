@@ -2,12 +2,14 @@ import { onPlayerCommand, onStartCommand } from "regal";
 import delayedExecution from "./delayed-exeuction";
 import immediateExecution from "./immediate-execution";
 import statetypeAndArrays from "./statetype-and-arrays";
+import definingAgents from "./defining-agents";
 import illegalAgentUse from "./illegal-agent-use";
 
 const SNIPPETS = {
     immediate: immediateExecution,
     delay: delayedExecution,
     statetype: statetypeAndArrays,
+    agent: definingAgents,
     illegal: illegalAgentUse
 };
 

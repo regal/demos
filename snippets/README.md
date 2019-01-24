@@ -36,5 +36,6 @@ Name | Command | Description
 Immediate Exeuction | `immediate` | Demonstrates immediate event queueing.
 Delayed Exeuction | `delay` | Demonstrates delayed event queueing.
 StateType and Arrays | `statetype` | Demonstrates using `StateType` and `GameEventBuilder` to create parameterized events. Uses an agent array.
+Defining Agents | `agent` | Demonstrates how to define and use an agent.
 Illegal Agent Use | `illegal` | Throws an error because an inactive agent is accessed within a game cycle.
 
