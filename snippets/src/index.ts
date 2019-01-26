@@ -7,6 +7,7 @@ import definingAgents from "./defining-agents";
 import illegalAgentUse from "./illegal-agent-use";
 import implicitActivation from "./implicit-activation";
 import explicitActivation from "./explicit-activation";
+import staticAgents from "./static-agents";
 
 const SNIPPETS = {
     immediate: immediateExecution,
@@ -15,7 +16,8 @@ const SNIPPETS = {
     agent: definingAgents,
     illegal: illegalAgentUse,
     implicit: implicitActivation,
-    explicit: explicitActivation
+    explicit: explicitActivation,
+    static: staticAgents
 };
 
 //~ Hooks ~//
