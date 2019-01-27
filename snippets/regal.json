@@ -3,5 +3,10 @@
         "output": {
             "minify": true
         }
+    },
+    "game": {
+        "options": {
+            "debug": true
+        }
     }
 }

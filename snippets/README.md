@@ -42,3 +42,4 @@ Implicit Activation | `implicit` | Demonstrates all the ways that agents can be 
 Explicit Activation | `explicit` | Demonstrates how to activate an agent explicitly.
 Static Agents | `static` | Demonstrates how to define and use static agents.
 Random | `random` | Demonstrates how to generate random values with `InstanceRandom`.
+Output | `output` | Demonstrates each of type of output line supported by `InstanceOutput`.

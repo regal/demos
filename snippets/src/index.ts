@@ -9,6 +9,7 @@ import implicitActivation from "./implicit-activation";
 import explicitActivation from "./explicit-activation";
 import staticAgents from "./static-agents";
 import random from "./random";
+import output from "./output";
 
 const SNIPPETS = {
     immediate: immediateExecution,
@@ -19,12 +20,21 @@ const SNIPPETS = {
     implicit: implicitActivation,
     explicit: explicitActivation,
     static: staticAgents,
-    random
+    random,
+    output
 };
 
 //~ Hooks ~//
 onStartCommand(game => {
     game.output.write("Startup successful.");
+
+    if (game.options.debug) {
+        game.output.write("debug is enabled.");
+    }
+    if (!game.options.showMinor) {
+        game.output.write("showMinor is disabled.");
+    }
+
     game.output.write(`Possible snippets: ${Object.keys(SNIPPETS).join(", ")}`);
 });
 
