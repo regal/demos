@@ -41,4 +41,4 @@ Illegal Agent Use | `illegal` | Throws an error because an inactive agent is acc
 Implicit Activation | `implicit` | Demonstrates all the ways that agents can be activated implicitly.
 Explicit Activation | `explicit` | Demonstrates how to activate an agent explicitly.
 Static Agents | `static` | Demonstrates how to define and use static agents.
-
+Random | `random` | Demonstrates how to generate random values with `InstanceRandom`.

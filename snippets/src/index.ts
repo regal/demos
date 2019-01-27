@@ -8,6 +8,7 @@ import illegalAgentUse from "./illegal-agent-use";
 import implicitActivation from "./implicit-activation";
 import explicitActivation from "./explicit-activation";
 import staticAgents from "./static-agents";
+import random from "./random";
 
 const SNIPPETS = {
     immediate: immediateExecution,
@@ -17,7 +18,8 @@ const SNIPPETS = {
     illegal: illegalAgentUse,
     implicit: implicitActivation,
     explicit: explicitActivation,
-    static: staticAgents
+    static: staticAgents,
+    random
 };
 
 //~ Hooks ~//
