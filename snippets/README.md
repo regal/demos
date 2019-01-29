@@ -43,3 +43,23 @@ Explicit Activation | `explicit` | Demonstrates how to activate an agent explici
 Static Agents | `static` | Demonstrates how to define and use static agents.
 Random | `random` | Demonstrates how to generate random values with `InstanceRandom`.
 Output | `output` | Demonstrates each of type of output line supported by `InstanceOutput`.
+
+## External Snippets
+
+Some code snippets in this project demonstrate how a client would use the Regal API externally. 
+
+To run these snippets, first install `ts-node`:
+```
+npm install -g ts-node
+```
+
+Navigate to the `external-snippets` directory:
+```
+cd external-snippets
+```
+
+Then, run one of the following commands from the terminal:
+
+Name | Command | Description
+--- | --- | ---
+Using `Game` | `ts-node using-game.ts` | Demonstrates the output of a basic start command and player command through the `Game` object.
