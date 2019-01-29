@@ -8,33 +8,33 @@ import { on, Charsets, Agent } from "regal";
 
 const randos = on("RANDOS", game => {
     const bool = game.random.boolean(); // Either true or false
-    game.output.write(`Boolean: ${bool}`);
+    game.output.write(`Boolean -> ${bool}`);
 
     const int = game.random.int(1, 10); // Integer between 1 and 10, inclusive
-    game.output.write(`Int: ${int}`);
+    game.output.write(`Int -> ${int}`);
 
     const dec = game.random.decimal(); // Random decimal betweeen 0 and 1
-    game.output.write(`Decimal: ${dec}`); 
+    game.output.write(`Decimal -> ${dec}`); 
 
     const str = game.random.string(10); // Random string of length 10
-    game.output.write(`String: ${str}`);
+    game.output.write(`String -> ${str}`);
 });
 
 const rstrings = on("RSTRINGS", game => {
     const alphanumeric = game.random.string(10, Charsets.ALHPANUMERIC_CHARSET);
-    game.output.write(`Alphanumeric: ${alphanumeric}`);
+    game.output.write(`Alphanumeric -> ${alphanumeric}`);
 
     const alphabet = game.random.string(10, Charsets.ALPHABET_CHARSET);
-    game.output.write(`Alphabet: ${alphabet}`);
+    game.output.write(`Alphabet -> ${alphabet}`);
 
     const numbers = game.random.string(10, Charsets.NUMBERS_CHARSET);
-    game.output.write(`Numbers: ${numbers}`);
+    game.output.write(`Numbers -> ${numbers}`);
 
     const hex = game.random.string(10, Charsets.NUMBERS_CHARSET + "ABCDEF");
-    game.output.write(`Hex: ${hex}`);
+    game.output.write(`Hex -> ${hex}`);
 
     const binary = game.random.string(10, "10");
-    game.output.write(`Binary: ${binary}`);
+    game.output.write(`Binary -> ${binary}`);
 
     game.output.write(`Old MacDonald had a farm, ${game.random.string(5, "eio")}.`);
 });
