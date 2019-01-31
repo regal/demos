@@ -64,3 +64,4 @@ Name | Command | Description
 --- | --- | ---
 Using `Game` | `ts-node using-game` | Demonstrates the output of a basic start command and player command through the `Game` object.
 Undo | `ts-node undo` | Demonstrates undo commands and how to use the `onBeforeUndoCommand` hook.
+Options | `ts-node options-demo` | Demonstrates how to use game options.
