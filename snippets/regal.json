@@ -5,6 +5,7 @@
         }
     },
     "game": {
+        "author": "Joe Cowman",
         "options": {
             "debug": true
         }

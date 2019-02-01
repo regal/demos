@@ -1,0 +1,9 @@
+{
+  "name": "my-game",
+  "version": "1.0.0",
+  "description": "",
+  "author": "Joe Cowman",
+  "dependencies": {
+    "regal": "^0.7.1"
+  }
+}
