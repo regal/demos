@@ -10,7 +10,7 @@
     "play": "node play"
   },
   "dependencies": {
-    "regal": "^0.7.1"
+    "regal": "^1.0.0"
   },
   "devDependencies": {
     "readline": "^1.3.0",

@@ -183,7 +183,7 @@ var Prando = /** @class */ (function () {
 /**
  * Source code for Regal (a.k.a. the Regal Game Library), part of the Regal Framework.
  * 
- * Copyright (c) 2018 Joseph R Cowman
+ * Copyright (c) Joseph R Cowman
  * Licensed under MIT License (see https://github.com/regal/regal)
  */
 
@@ -262,7 +262,7 @@ const DEFAULT_GAME_OPTIONS = {
 const OPTION_KEYS = Object.keys(DEFAULT_GAME_OPTIONS);
 
 /**
- * Error thrown during execution of Regal library functions.
+ * Error that is thrown if a Regal function fails.
  */
 class RegalError extends Error {
     /**
@@ -527,7 +527,7 @@ class InstanceOptionsImpl {
     }
 }
 
-var version = "0.7.1";
+var version = "1.0.0";
 
 /** The names of every metadata property. */
 const METADATA_KEYS = [
@@ -637,8 +637,12 @@ const isTrackedEvent = (o) => o !== undefined && o.target !== undefined;
 /** Ensures the object is an `EventQueue`. */
 const isEventQueue = (o) => o !== undefined && o.immediateEvents !== undefined;
 /**
- * "No operation" - reserved `TrackedEvent` that signals no more events.
- * Use only in rare cases where an event cannot return `void`.
+ * Reserved `TrackedEvent` that signals no more events.
+ *
+ * `noop` is short for *no operation*.
+ *
+ * Meant to be used in rare cases where an event cannot return `void`
+ * (i.e. forced by the TypeScript compiler).
  */
 const noop = (() => {
     const nonEvent = (game) => undefined;
@@ -784,14 +788,15 @@ class InstanceEventsImpl {
 }
 
 /**
- * Adds the events to the end of the game's event queue.
+ * Creates an `EventQueue` that adds the events to the end of the game's internal queue,
+ * meaning they will be executed after all of the currently queued events are finished.
  *
  * If the events are `EventQueue`s, any events in the queues' `immediateEvents`
  * collections will be concatenated, followed by any events in the queues' `delayedEvents`.
  *
  * @template StateType The `GameInstance` state type. Optional, defaults to `any`.
  * @param events The events to be added.
- * @returns The `EventQueue` with all events in the queue's `delayedEvent` collection.
+ * @returns An `EventQueue` that place all events in the `delayedEvent` array when invoked.
  */
 const enqueue = (...events) => {
     const argImmediateEvents = [];
@@ -809,7 +814,7 @@ const enqueue = (...events) => {
 };
 /**
  * Constructs a `TrackedEvent`, which is a function that modifies a `GameInstance`
- * and tracks all changes as they occur.
+ * and tracks all state changes as they occur.
  *
  * All modifications to game state within a Regal game should take place through a `TrackedEvent`.
  * This function is the standard way to declare a `TrackedEvent`.
@@ -926,7 +931,7 @@ var OutputLineType;
      */
     OutputLineType["MINOR"] = "MINOR";
     /**
-     * Meant for debugging purposes; only visible when the `DEBUG` option is enabled.
+     * Meant for debugging purposes; only visible when the `debug` option is enabled.
      */
     OutputLineType["DEBUG"] = "DEBUG";
     /**
@@ -1701,10 +1706,13 @@ class HookManager {
 HookManager.beforeUndoCommandHook = returnTrue;
 
 /**
- * Sets the function to be executed whenever a player command is sent to the Game API
- * via `Game.postPlayerCommand`.
+ * `GameApi` hook that sets the function to be executed whenever a player command
+ * is sent to the Game API via `GameApi.postPlayerCommand`.
+ *
+ * May only be set once.
+ *
  * @param handler A function that takes a string containing the player's command and
- * generates an `EventFunction`. May be an `EventFunction`, `TrackedEvent`, or `EventQueue`.
+ * returns an `EventFunction`. May be an `EventFunction`, `TrackedEvent`, or `EventQueue`.
  */
 const onPlayerCommand = (handler) => {
     if (HookManager.playerCommandHook !== undefined) {
@@ -1727,9 +1735,13 @@ const onPlayerCommand = (handler) => {
     HookManager.playerCommandHook = trackedEvent;
 };
 /**
- * Sets the function to be executed whenever a start command is sent to the Game API
- * via `Game.postStartCommand`.
- * @param handler The `EventFunction` to be executed. May be an `EventFunction`, `TrackedEvent`, or `EventQueue`.
+ * `GameApi` hook that sets the function to be executed whenever a start command
+ * is sent to the Game API via `GameApi.postStartCommand`.
+ *
+ * May only be set once.
+ *
+ * @param handler The `EventFunction` to be executed. May be an `EventFunction`,
+ * `TrackedEvent`, or `EventQueue`.
  */
 const onStartCommand = (handler) => {
     if (HookManager.startCommandHook !== undefined) {
@@ -1816,10 +1828,11 @@ const buildLogResponse = (err, newInstance) => {
 };
 const NOT_INITALIZED_ERROR_MSG = "Game has not been initalized. Did you remember to call Game.init?";
 /**
- * Game API
+ * Global implementation of `GameApiExtended`.
  *
- * Used for external interaction with the game, and shouldn't be accessed
- * within the game itself.
+ * The `Game` object serves as an exportable API for playing the game.
+ * It is used for external interaction with the game, and shouldn't
+ * be accessed within the game itself.
  */
 const Game = {
     get isInitialized() {
