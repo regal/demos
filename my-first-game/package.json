@@ -10,11 +10,11 @@
     "play": "node play"
   },
   "dependencies": {
-    "regal": "^1.0.0"
+    "regal": "^2.0.0"
   },
   "devDependencies": {
     "readline": "^1.3.0",
-    "regal-bundler": "^1.0.0",
+    "regal-bundler": "^1.2.0",
     "typescript": "^3.2.2"
   }
 }

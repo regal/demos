@@ -4,6 +4,6 @@
   "description": "",
   "author": "Joe Cowman",
   "dependencies": {
-    "regal": "^0.7.1"
+    "regal": "^2.0.0"
   }
 }
